@@ -105,6 +105,14 @@ The `personas/` folder contains prompt files for five specialist roles. To invok
 
 The user (BI manager) acts as team lead — personas report to them and defer to their decisions on scope and direction.
 
+### Inline persona callouts
+
+When a decision, design, or piece of code is directly in a persona's domain, include a brief inline callout in that response — no need for the user to explicitly invoke them. Format:
+
+> **[Jordan — UX]:** The "Add Food" button should be a persistent floating action button, not buried in a menu — users tap it dozens of times a day.
+
+Keep callouts to 1–3 sentences. Only include the personas whose expertise is genuinely relevant to what's being discussed. Never force a callout just to use all five.
+
 ---
 
 ## Working with the user
