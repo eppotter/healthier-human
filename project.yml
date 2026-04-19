@@ -1,0 +1,48 @@
+name: HealthierHuman
+options:
+  bundleIdPrefix: com.eppotter
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "26.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    DEVELOPMENT_TEAM: ""
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGNING_ALLOWED: "NO"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGN_IDENTITY: ""
+
+targets:
+  HealthierHuman:
+    type: application
+    platform: iOS
+    sources:
+      - path: HealthierHuman
+    info:
+      path: HealthierHuman/Info.plist
+      properties:
+        UILaunchScreen:
+          UIColorName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        INFOPLIST_FILE: HealthierHuman/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.eppotter.healthierhuman
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+
+  HealthierHumanTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: HealthierHumanTests
+    dependencies:
+      - target: HealthierHuman
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.eppotter.healthierhuman.tests
