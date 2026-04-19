@@ -90,6 +90,23 @@ Cloud sync, accounts, social features, barcode scanning, Apple Health integratio
 
 ---
 
+## Team personas
+
+The `personas/` folder contains prompt files for five specialist roles. To invoke one, open a Claude Code session and say:
+> "Take on the [Role] persona from personas/[filename].md."
+
+| Persona | File | When to use |
+|---|---|---|
+| Mobile UX Designer (Jordan) | `personas/ux-designer.md` | Screen layout, tap flow, interaction patterns |
+| Nutrition & Health Expert (Dr. Casey) | `personas/nutrition-expert.md` | Calorie math review, safety copy, edge cases |
+| App Store Strategist (Riley) | `personas/app-store-strategist.md` | Launch prep, listing, ratings, TestFlight |
+| Consumer Product Manager (Sam) | `personas/product-manager.md` | Scope decisions, user stories, prioritization |
+| Data Engineer (Morgan) | `personas/data-engineer.md` | Schema design, SwiftData models, API mapping |
+
+The user (BI manager) acts as team lead — personas report to them and defer to their decisions on scope and direction.
+
+---
+
 ## Working with the user
 
 - Never ask the user to write or edit code — do all coding yourself
