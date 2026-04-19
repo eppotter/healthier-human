@@ -18,7 +18,7 @@ actor USDAClient {
             URLQueryItem(name: "query",    value: query),
             URLQueryItem(name: "api_key",  value: apiKey),
             URLQueryItem(name: "pageSize", value: "\(pageSize)"),
-            URLQueryItem(name: "dataType", value: "Foundation,SR Legacy")
+            URLQueryItem(name: "dataType", value: "Survey (FNDDS),Foundation,SR Legacy")
         ]
         guard let url = comps.url else { throw USDAError.badURL }
         let (data, response) = try await URLSession.shared.data(from: url)

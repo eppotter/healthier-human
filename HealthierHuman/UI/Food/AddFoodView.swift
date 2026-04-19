@@ -78,8 +78,17 @@ private struct LibrarySearchView: View {
     @Environment(\.modelContext) private var modelContext
 
     private var filtered: [Food] {
-        if searchText.isEmpty { return allFoods }
-        return allFoods.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        guard !searchText.isEmpty else { return allFoods }
+        let query = searchText.lowercased()
+        // Exact contains match first, then word-starts-with match
+        let exact = allFoods.filter { $0.name.lowercased().contains(query) }
+        if !exact.isEmpty { return exact }
+        // Fuzzy: any word in the food name starts with any word in the query
+        let queryWords = query.split(separator: " ").map(String.init)
+        return allFoods.filter { food in
+            let foodWords = food.name.lowercased().split(separator: " ").map(String.init)
+            return queryWords.allSatisfy { qw in foodWords.contains { fw in fw.hasPrefix(qw) } }
+        }
     }
 
     var body: some View {
