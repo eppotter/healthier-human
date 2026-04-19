@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild *)",
+      "Bash(xcodegen *)",
+      "Bash(xcrun *)",
+      "Bash(xcrun simctl *)",
+      "Bash(swift *)",
+      "Bash(swiftc *)",
+      "Bash(open -a *)",
+      "Bash(mkdir -p *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Bash(git config *)",
+      "Bash(git clone *)",
+      "Bash(git credential*)",
+      "Bash(brew install *)",
+      "Bash(brew *)",
+      "Bash(printf *)",
+      "Bash(security find-internet-password *)",
+      "Bash(curl *)",
+      "Bash(sudo xcodebuild *)"
+    ]
+  }
+}
