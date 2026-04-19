@@ -6,7 +6,6 @@ struct DailyTrackerView: View {
 
     @State private var selectedDate = Date()
     @State private var addingMealType: MealType? = nil
-    @State private var alcoholExpanded = false
 
     var body: some View {
         NavigationStack {
@@ -30,7 +29,6 @@ struct DailyTrackerView: View {
                     // Alcohol — intentionally separate
                     AlcoholSectionView(
                         date: selectedDate,
-                        isExpanded: $alcoholExpanded,
                         onAddFood: { addingMealType = .alcohol }
                     )
 
@@ -307,15 +305,13 @@ private struct WaterTrackerCard: View {
 
 private struct AlcoholSectionView: View {
     let date: Date
-    @Binding var isExpanded: Bool
     let onAddFood: () -> Void
 
     @Query private var entries: [FoodEntry]
     @Environment(\.modelContext) private var modelContext
 
-    init(date: Date, isExpanded: Binding<Bool>, onAddFood: @escaping () -> Void) {
+    init(date: Date, onAddFood: @escaping () -> Void) {
         self.date = date
-        self._isExpanded = isExpanded
         self.onAddFood = onAddFood
         let start = Calendar.current.startOfDay(for: date)
         let end   = Calendar.current.date(byAdding: .day, value: 1, to: start)!
@@ -326,99 +322,55 @@ private struct AlcoholSectionView: View {
     }
 
     private var totalCalories: Int { Int(entries.reduce(0) { $0 + $1.calories }) }
-    private var hasEntries: Bool { !entries.isEmpty }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Header — always visible, tap to expand
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    isExpanded.toggle()
-                }
-            } label: {
-                HStack {
-                    Text("🍺")
-                    Text("Alcohol")
-                        .font(.headline)
-                        .foregroundStyle(.orange)
-                    if hasEntries {
-                        Text("· \(totalCalories) cal")
-                            .font(.subheadline)
-                            .foregroundStyle(.orange.opacity(0.8))
-                    }
-                    Spacer()
-                    if hasEntries && !isExpanded {
-                        Text("\(entries.count) item\(entries.count == 1 ? "" : "s")")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 14)
-            }
-            .buttonStyle(.plain)
-
-            // Expanded content
-            if isExpanded {
-                Divider().padding(.horizontal)
-
-                // Intentional nudge
-                HStack(spacing: 8) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.orange)
-                        .font(.caption)
-                    Text("Alcohol slows fat loss and adds empty calories. Log it honestly to stay on track.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
-
-                if entries.isEmpty {
-                    Text("No drinks logged today")
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
-                        .padding(.horizontal)
-                        .padding(.bottom, 12)
-                } else {
-                    ForEach(entries) { entry in
-                        FoodEntryRow(entry: entry)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button(role: .destructive) {
-                                    modelContext.delete(entry)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
-                    }
-                }
-
+            // Header — matches meal section style, orange accent
+            HStack {
+                Text(MealType.alcohol.emoji)
+                Text("Alcohol")
+                    .font(.headline)
+                    .foregroundStyle(.orange)
+                Spacer()
+                Text("\(totalCalories) cal")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
                 Button(action: onAddFood) {
-                    Label("Add drink", systemImage: "plus.circle")
-                        .font(.subheadline)
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title3)
                         .foregroundStyle(.orange)
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 10)
+                .accessibilityLabel("Add alcohol")
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 12)
+
+            if entries.isEmpty {
+                Text("Nothing logged yet")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+                    .padding(.horizontal)
+                    .padding(.bottom, 12)
+            } else {
+                Divider().padding(.horizontal)
+                ForEach(entries) { entry in
+                    FoodEntryRow(entry: entry)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                modelContext.delete(entry)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                }
             }
         }
-        .background(
-            hasEntries
-                ? Color.orange.opacity(0.08)
-                : Color(.systemGray6)
-        )
+        .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .strokeBorder(hasEntries ? Color.orange.opacity(0.3) : Color.clear, lineWidth: 1)
+                .strokeBorder(entries.isEmpty ? Color.clear : Color.orange.opacity(0.4), lineWidth: 1)
         )
-        .onAppear {
-            // Auto-expand if there are entries
-            if hasEntries { isExpanded = true }
-        }
     }
 }
 
