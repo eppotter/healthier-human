@@ -18,6 +18,8 @@ final class Food {
 
     /// Where this food came from.
     var sourceRaw: String
+    /// True if this food is an alcoholic drink — used to filter the Alcohol section.
+    var isAlcohol: Bool
     var createdAt: Date
 
     @Relationship(deleteRule: .cascade)
@@ -31,7 +33,8 @@ final class Food {
         proteinPer100g: Double? = nil,
         carbsPer100g: Double? = nil,
         fatPer100g: Double? = nil,
-        source: FoodSource = .manual
+        source: FoodSource = .manual,
+        isAlcohol: Bool = false
     ) {
         self.name = name
         self.caloriesPerServing = caloriesPerServing
@@ -41,6 +44,7 @@ final class Food {
         self.carbsPer100g = carbsPer100g
         self.fatPer100g = fatPer100g
         self.sourceRaw = source.rawValue
+        self.isAlcohol = isAlcohol
         self.createdAt = Date()
     }
 

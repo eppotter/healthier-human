@@ -4,7 +4,7 @@ import SwiftData
 /// Loads CommonFoods.json into SwiftData once on first launch.
 /// Subsequent launches are skipped using a UserDefaults version flag.
 enum FoodDatabaseSeeder {
-    private static let seededVersionKey = "com.healthierhuman.fooddb.seeded.v2"
+    private static let seededVersionKey = "com.healthierhuman.fooddb.seeded.v3"
 
     /// Call this at app startup. No-op after the first run.
     static func seedIfNeeded(context: ModelContext) {
@@ -22,7 +22,8 @@ enum FoodDatabaseSeeder {
                 proteinPer100g: raw.proteinPer100g,
                 carbsPer100g: raw.carbsPer100g,
                 fatPer100g: raw.fatPer100g,
-                source: .bundled
+                source: .bundled,
+                isAlcohol: raw.isAlcohol ?? false
             )
             context.insert(food)
         }
@@ -40,5 +41,6 @@ enum FoodDatabaseSeeder {
         let proteinPer100g: Double?
         let carbsPer100g: Double?
         let fatPer100g: Double?
+        let isAlcohol: Bool?
     }
 }

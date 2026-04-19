@@ -11,6 +11,8 @@ struct AddFoodView: View {
     @State private var selectedTab: FoodTab = .library
     @State private var showingManualEntry = false
 
+    private var isAlcoholMode: Bool { mealType == .alcohol }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -30,18 +32,20 @@ struct AddFoodView: View {
                         searchText: $searchText,
                         mealType: mealType,
                         date: date,
+                        alcoholOnly: isAlcoholMode,
                         onLogged: { dismiss() },
-                        onManualEntry: { showingManualEntry = true }
+                        onManualEntry: isAlcoholMode ? nil : { showingManualEntry = true }
                     )
                 case .usda:
                     USDASearchView(
                         mealType: mealType,
                         date: date,
+                        defaultQuery: isAlcoholMode ? "alcoholic drink beer wine spirits" : "",
                         onLogged: { dismiss() }
                     )
                 }
             }
-            .navigationTitle("Add Food")
+            .navigationTitle(isAlcoholMode ? "Add Drink" : "Add Food")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -71,21 +75,24 @@ private struct LibrarySearchView: View {
     @Binding var searchText: String
     let mealType: MealType
     let date: Date
+    let alcoholOnly: Bool
     let onLogged: () -> Void
-    let onManualEntry: () -> Void
+    let onManualEntry: (() -> Void)?
 
     @Query(sort: \Food.name) private var allFoods: [Food]
     @Environment(\.modelContext) private var modelContext
 
+    private var pool: [Food] {
+        alcoholOnly ? allFoods.filter { $0.isAlcohol } : allFoods.filter { !$0.isAlcohol }
+    }
+
     private var filtered: [Food] {
-        guard !searchText.isEmpty else { return allFoods }
+        guard !searchText.isEmpty else { return pool }
         let query = searchText.lowercased()
-        // Exact contains match first, then word-starts-with match
-        let exact = allFoods.filter { $0.name.lowercased().contains(query) }
+        let exact = pool.filter { $0.name.lowercased().contains(query) }
         if !exact.isEmpty { return exact }
-        // Fuzzy: any word in the food name starts with any word in the query
         let queryWords = query.split(separator: " ").map(String.init)
-        return allFoods.filter { food in
+        return pool.filter { food in
             let foodWords = food.name.lowercased().split(separator: " ").map(String.init)
             return queryWords.allSatisfy { qw in foodWords.contains { fw in fw.hasPrefix(qw) } }
         }
@@ -93,30 +100,32 @@ private struct LibrarySearchView: View {
 
     var body: some View {
         List {
-            Section {
-                Button {
-                    onManualEntry()
-                } label: {
-                    Label("Enter food manually", systemImage: "square.and.pencil")
-                        .foregroundStyle(.green)
+            if let manualEntry = onManualEntry {
+                Section {
+                    Button {
+                        manualEntry()
+                    } label: {
+                        Label("Enter food manually", systemImage: "square.and.pencil")
+                            .foregroundStyle(.green)
+                    }
                 }
             }
 
             if filtered.isEmpty && !searchText.isEmpty {
                 Section {
-                    Text("No foods match \"\(searchText)\" — try searching USDA.")
+                    Text("No \(alcoholOnly ? "drinks" : "foods") match \"\(searchText)\".")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
             } else {
-                Section(searchText.isEmpty ? "Food Library" : "Results") {
+                Section(searchText.isEmpty ? (alcoholOnly ? "Drinks Library" : "Food Library") : "Results") {
                     ForEach(filtered) { food in
                         FoodRow(food: food) { log(food) }
                     }
                 }
             }
         }
-        .searchable(text: $searchText, prompt: "Search \(allFoods.count) foods…")
+        .searchable(text: $searchText, prompt: "Search \(pool.count) \(alcoholOnly ? "drinks" : "foods")…")
     }
 
     private func log(_ food: Food) {
@@ -136,6 +145,7 @@ private struct LibrarySearchView: View {
 private struct USDASearchView: View {
     let mealType: MealType
     let date: Date
+    let defaultQuery: String
     let onLogged: () -> Void
 
     @Environment(\.modelContext) private var modelContext
@@ -191,8 +201,9 @@ private struct USDASearchView: View {
                 }
             }
         }
-        .searchable(text: $query, prompt: "e.g. grilled chicken, greek yogurt")
+        .searchable(text: $query, prompt: mealType == .alcohol ? "e.g. beer, wine, margarita" : "e.g. grilled chicken, greek yogurt")
         .onSubmit(of: .search) { performSearch() }
+        .onAppear { if !defaultQuery.isEmpty { query = defaultQuery; performSearch() } }
         .sheet(item: $selectedFood) { food in
             USDAFoodDetailView(food: food, mealType: mealType, date: date, onLogged: onLogged)
         }
@@ -308,7 +319,8 @@ struct USDAFoodDetailView: View {
             proteinPer100g:  food.proteinPer100g,
             carbsPer100g:    food.carbsPer100g,
             fatPer100g:      food.fatPer100g,
-            source: .usda
+            source: .usda,
+            isAlcohol: mealType == .alcohol
         )
         modelContext.insert(savedFood)
         let entry = FoodEntry(food: savedFood, grams: g, mealType: mealType, date: date)
