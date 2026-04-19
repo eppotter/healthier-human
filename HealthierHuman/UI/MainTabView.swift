@@ -6,19 +6,16 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             DailyTrackerView(profile: profile)
-                .tabItem {
-                    Label("Today", systemImage: "fork.knife")
-                }
+                .tabItem { Label("Today",   systemImage: "fork.knife") }
+
+            WeightTrackerView()
+                .tabItem { Label("Weight",  systemImage: "scalemass.fill") }
 
             SavedFoodsView()
-                .tabItem {
-                    Label("Foods", systemImage: "list.bullet")
-                }
+                .tabItem { Label("Foods",   systemImage: "list.bullet") }
 
             SettingsView(profile: profile)
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
-                }
+                .tabItem { Label("Settings", systemImage: "gearshape") }
         }
         .tint(.green)
     }

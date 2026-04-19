@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01B4FDF31E2A5C7A904EEE37 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D54874B6B6DBD2A9498CEA4 /* MainTabView.swift */; };
+		0C9B483218D9C817D44FBEA5 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A29D1B5F5FA0979837ADB /* WeightTrackerView.swift */; };
 		0D6F4C7319743CB26504024C /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B996E28B79726DE8CFDE8C82 /* FoodEntry.swift */; };
 		323965A4CF43C9E20FBD88D3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430CFD9B9660E8A856E63A3B /* OnboardingView.swift */; };
 		4970721C9C087406849E6939 /* WaterLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870E9B74F5AD730067803E1 /* WaterLog.swift */; };
@@ -15,13 +16,17 @@
 		56E8A4D6D61E2610A1D1843B /* CalorieCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37A587AA04E7DFFC28FEA74 /* CalorieCalculatorTests.swift */; };
 		62863B7641F5A54BD650A49E /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529CEDDEF9AB96B7C0E3FDCC /* UserProfile.swift */; };
 		74DDBA0CDBB026DDCDF161F0 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866493186093ABA17B48CCEA /* Food.swift */; };
+		761B1C506B036D9DAAF159F2 /* CommonFoods.json in Resources */ = {isa = PBXBuildFile; fileRef = 04153F5A1AD13399EFD9F5B3 /* CommonFoods.json */; };
 		77FA6E83025FC61752145F7B /* CalorieCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDDE665AD8E2AF10C69C60 /* CalorieCalculator.swift */; };
 		A22E1DC5AAB7107B42D155C6 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DFD27E8AF5FDCC49346C96 /* AddFoodView.swift */; };
 		A348F835A8FB2256A035BA2C /* HealthierHumanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0731924A00FDC5981C8F8C9 /* HealthierHumanApp.swift */; };
 		A6161AC8BD79D492C4799D26 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B200FC56DC6B89B5F908A2 /* RootView.swift */; };
+		B4E8A882501B441E25CA687D /* USDAClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE24D7CCC808B1EB62887A1 /* USDAClient.swift */; };
 		D28A9739B05B0D976932B3AE /* SavedFoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C752F9955CE7AD587B96A /* SavedFoodsView.swift */; };
 		D29F8615F965509CFE962DA6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F69669EE14A2162DF34D6C /* SettingsView.swift */; };
+		E0FE50A15833DB93EF2FADDA /* FoodDatabaseSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA90231D6FEDE609A3846C6 /* FoodDatabaseSeeder.swift */; };
 		E51FF448FE21B4550A7A04B2 /* DailyTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275AFD37244D83919500ABA /* DailyTrackerView.swift */; };
+		F966CB27B3FBF7298A08021D /* WeightEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C232EC90D0B5B80568F875B /* WeightEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,18 +40,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04153F5A1AD13399EFD9F5B3 /* CommonFoods.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CommonFoods.json; sourceTree = "<group>"; };
 		13B200FC56DC6B89B5F908A2 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		2275AFD37244D83919500ABA /* DailyTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTrackerView.swift; sourceTree = "<group>"; };
 		2907381DAE19089BE0F03C2B /* HealthierHumanTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HealthierHumanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE24D7CCC808B1EB62887A1 /* USDAClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDAClient.swift; sourceTree = "<group>"; };
 		36249FCCF75E17EBEC72CBC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		430CFD9B9660E8A856E63A3B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		448F65D990E58DFDC0A217F6 /* HealthierHuman.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HealthierHuman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A1C752F9955CE7AD587B96A /* SavedFoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFoodsView.swift; sourceTree = "<group>"; };
 		529CEDDEF9AB96B7C0E3FDCC /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		53F69669EE14A2162DF34D6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6FA90231D6FEDE609A3846C6 /* FoodDatabaseSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDatabaseSeeder.swift; sourceTree = "<group>"; };
 		75DFD27E8AF5FDCC49346C96 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
+		7C232EC90D0B5B80568F875B /* WeightEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightEntry.swift; sourceTree = "<group>"; };
 		866493186093ABA17B48CCEA /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		8D54874B6B6DBD2A9498CEA4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		991A29D1B5F5FA0979837ADB /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
 		B996E28B79726DE8CFDE8C82 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		C0731924A00FDC5981C8F8C9 /* HealthierHumanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthierHumanApp.swift; sourceTree = "<group>"; };
 		C37A587AA04E7DFFC28FEA74 /* CalorieCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieCalculatorTests.swift; sourceTree = "<group>"; };
@@ -77,11 +87,21 @@
 			isa = PBXGroup;
 			children = (
 				866493186093ABA17B48CCEA /* Food.swift */,
+				6FA90231D6FEDE609A3846C6 /* FoodDatabaseSeeder.swift */,
 				B996E28B79726DE8CFDE8C82 /* FoodEntry.swift */,
 				529CEDDEF9AB96B7C0E3FDCC /* UserProfile.swift */,
 				D870E9B74F5AD730067803E1 /* WaterLog.swift */,
+				7C232EC90D0B5B80568F875B /* WeightEntry.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		4276FF56F1E006252B862A08 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				04153F5A1AD13399EFD9F5B3 /* CommonFoods.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		4CFD51FB46ADB7EB7DCA8A31 /* UI */ = {
@@ -91,6 +111,7 @@
 				35E9EA508472151E1CEDE9E3 /* Onboarding */,
 				B3A7A4C5AE00BEC0BA964B02 /* Settings */,
 				E708724C1A8866BF12B5A08A /* Tracker */,
+				981AEBD902BCF65B17E7BD64 /* Weight */,
 				8D54874B6B6DBD2A9498CEA4 /* MainTabView.swift */,
 			);
 			path = UI;
@@ -102,6 +123,8 @@
 				E245FBB791311E8DC76DC70C /* App */,
 				389B82DBCBC54694C65CA8EC /* Data */,
 				8AA61EA21C02D0F135C38A7E /* Domain */,
+				B7DA8FCDB241AFF719B2B923 /* Network */,
+				4276FF56F1E006252B862A08 /* Resources */,
 				4CFD51FB46ADB7EB7DCA8A31 /* UI */,
 				36249FCCF75E17EBEC72CBC2 /* Assets.xcassets */,
 				C919BB1D3F7B85E49568E95B /* Info.plist */,
@@ -125,6 +148,14 @@
 			path = HealthierHumanTests;
 			sourceTree = "<group>";
 		};
+		981AEBD902BCF65B17E7BD64 /* Weight */ = {
+			isa = PBXGroup;
+			children = (
+				991A29D1B5F5FA0979837ADB /* WeightTrackerView.swift */,
+			);
+			path = Weight;
+			sourceTree = "<group>";
+		};
 		ABDD16ED55F7D644808732D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +171,14 @@
 				53F69669EE14A2162DF34D6C /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		B7DA8FCDB241AFF719B2B923 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2BE24D7CCC808B1EB62887A1 /* USDAClient.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		C181BEA45924130F85EAA8BA /* Food */ = {
@@ -250,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5397B37C60DBE4882CA2E063 /* Assets.xcassets in Resources */,
+				761B1C506B036D9DAAF159F2 /* CommonFoods.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +304,7 @@
 				77FA6E83025FC61752145F7B /* CalorieCalculator.swift in Sources */,
 				E51FF448FE21B4550A7A04B2 /* DailyTrackerView.swift in Sources */,
 				74DDBA0CDBB026DDCDF161F0 /* Food.swift in Sources */,
+				E0FE50A15833DB93EF2FADDA /* FoodDatabaseSeeder.swift in Sources */,
 				0D6F4C7319743CB26504024C /* FoodEntry.swift in Sources */,
 				A348F835A8FB2256A035BA2C /* HealthierHumanApp.swift in Sources */,
 				01B4FDF31E2A5C7A904EEE37 /* MainTabView.swift in Sources */,
@@ -271,8 +312,11 @@
 				A6161AC8BD79D492C4799D26 /* RootView.swift in Sources */,
 				D28A9739B05B0D976932B3AE /* SavedFoodsView.swift in Sources */,
 				D29F8615F965509CFE962DA6 /* SettingsView.swift in Sources */,
+				B4E8A882501B441E25CA687D /* USDAClient.swift in Sources */,
 				62863B7641F5A54BD650A49E /* UserProfile.swift in Sources */,
 				4970721C9C087406849E6939 /* WaterLog.swift in Sources */,
+				F966CB27B3FBF7298A08021D /* WeightEntry.swift in Sources */,
+				0C9B483218D9C817D44FBEA5 /* WeightTrackerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

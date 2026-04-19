@@ -50,7 +50,8 @@ final class Food {
 }
 
 enum FoodSource: String {
-    case manual  // user typed it in
-    case usda    // phase 2
+    case manual        // user typed it in
+    case bundled       // shipped with the app (CommonFoods.json)
+    case usda          // USDA FoodData Central API
     case openFoodFacts // phase 3
 }

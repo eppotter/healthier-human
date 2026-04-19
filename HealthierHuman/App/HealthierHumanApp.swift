@@ -11,7 +11,8 @@ struct HealthierHumanApp: App {
             UserProfile.self,
             Food.self,
             FoodEntry.self,
-            WaterLog.self
+            WaterLog.self,
+            WeightEntry.self
         ])
     }
 }

@@ -79,7 +79,8 @@ final class FoodEntry {
     }
 }
 
-enum MealType: String, CaseIterable {
+enum MealType: String, CaseIterable, Identifiable {
+    var id: String { rawValue }
     case breakfast = "Breakfast"
     case lunch     = "Lunch"
     case dinner    = "Dinner"
