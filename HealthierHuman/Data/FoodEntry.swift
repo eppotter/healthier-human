@@ -85,6 +85,10 @@ enum MealType: String, CaseIterable, Identifiable {
     case lunch     = "Lunch"
     case dinner    = "Dinner"
     case snack     = "Snack"
+    case alcohol   = "Alcohol"
+
+    /// Meal types shown in the main food sections (excludes alcohol).
+    static var foodCases: [MealType] { [.breakfast, .lunch, .dinner, .snack] }
 
     var emoji: String {
         switch self {
@@ -92,6 +96,7 @@ enum MealType: String, CaseIterable, Identifiable {
         case .lunch:     "☀️"
         case .dinner:    "🌙"
         case .snack:     "🍎"
+        case .alcohol:   "🍺"
         }
     }
 }
